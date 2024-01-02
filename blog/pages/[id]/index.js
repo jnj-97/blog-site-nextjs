@@ -3,6 +3,7 @@ import Image from 'next/image'
 import axios from 'axios'
 import blogpic from '../../public/blog.webp'
 import Link from 'next/link'
+import Comment from '@/components/comment'
 const inter = Inter({ subsets: ['latin'] })
 
 export async function getServerSideProps({ params }) {
@@ -32,11 +33,7 @@ export default function Home({id,blog,comments}) {
    
     <h1 className='text-center text-3xl font-bold p-10'>Comments</h1>
     {comments.comments.map((comment)=>{
-      return(<div className='bg-slate-200 m-4 p-10'>
-        <h1><a className='text-md' href={`mailto:${comment.email}`}>{comment.email}</a><span className='pl-5 text-sm'>{comment.id} hours ago</span></h1>
-        <h1 className='text-md font-bold pt-4 '>{comment.name}</h1>
-        <p>{comment.body}</p>
-      </div>)
+      return(<Comment email={comment.email} id={comment.id} body={comment.body} name={comment.name}/>)
     })}
    <p className='text-center'><Link href="http://localhost:3000" className=' text-center bg-slate-400 text-blue p-5 text-xl rounded-md'>Go Back Home</Link></p>
     </>)
