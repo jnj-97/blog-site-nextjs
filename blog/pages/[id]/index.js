@@ -21,20 +21,19 @@ export async function getServerSideProps({ params }) {
     },
   };
 }
-export default function Home({id,blog,comments}) {
-  console.log("params: ",{id})
+export default function BlogPage({blog,comments}) {
   return (<>
-  <h1 className='text-center text-3xl font-bold'>{blog.blog.title}</h1>
-  <p className='py-10 px-5 text-left text-md'>{blog.blog.body}</p>
-  <h5 className='text-right pr-5 text-lg font-lg'>Written by Nobin Johnson</h5>
-  
-  <Image width={1000} className='pl-72' height={1000} src={blogpic}></Image>
+  <h1 data-testid="title" className='text-center text-3xl font-bold'>{blog.blog.title}</h1>
+  <p data-testid="blog-body" className='py-10 px-5 text-left text-md'>{blog.blog.body}</p>
+  <h5 data-testid="author" className='text-right pr-5 text-lg font-lg'>Written by Nobin Johnson</h5>
+  <div className='flex justify-around'>
+  <Image data-testid="image" className='pt-10' width={1000} height={1000} src={blogpic}></Image>
+  </div>
    
-   
-    <h1 className='text-center text-3xl font-bold p-10'>Comments</h1>
+    <h1 data-testid="comment" className='text-center text-3xl font-bold p-10'>Comments</h1>
     {comments.comments.map((comment)=>{
       return(<Comment email={comment.email} id={comment.id} body={comment.body} name={comment.name}/>)
     })}
-   <p className='text-center'><Link href="http://localhost:3000" className=' text-center bg-slate-400 text-blue p-5 text-xl rounded-md'>Go Back Home</Link></p>
+   <p className='text-center'><Link data-testid="back" href="http://localhost:3000" className=' text-center bg-slate-400 text-blue p-5 text-xl rounded-md'>Go Back Home</Link></p>
     </>)
 }
