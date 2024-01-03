@@ -1,6 +1,8 @@
 import {render,screen} from '@testing-library/react'
 import Home from '@/pages'
-
+jest.mock('next/router', () => ({
+    useRouter: jest.fn(),
+  }));
 describe('Home page',()=>{
     const blogs=[
         {

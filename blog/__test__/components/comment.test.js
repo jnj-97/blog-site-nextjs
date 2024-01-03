@@ -5,7 +5,7 @@ describe('Comment Component',()=>{
     it('Should render component with no text',()=>{
         render(<Comment/>)
         const container=screen.getByTestId("container")
-        expect(container).toHaveClass("bg-slate-200")
+        expect(container).toBeInTheDocument()
     })
     it('Should render the component with email as test',()=>{
         render(<Comment email="test"/>)

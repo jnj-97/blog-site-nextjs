@@ -1,6 +1,11 @@
 import {render,screen} from '@testing-library/react'
-import BlogPage from '@/pages/[id]'
-
+import BlogPage from '@/pages/blog/[id]'
+jest.mock('next/router', () => ({
+    useRouter: jest.fn(() => ({
+      push: jest.fn(),
+      prefetch: jest.fn(),
+    })),
+  }));
 describe('Blog page',()=>{
     const comments=[
         {
@@ -70,6 +75,36 @@ describe('Blog page',()=>{
     it('Should render Comment Heading',()=>{
         render(<BlogPage blog={{blog:blog}} comments={{comments:comments}}/>)
         const comment=screen.getByTestId("comment")
+        expect(comment).toHaveTextContent("Comment")
+    })
+    it('Should render Add Comment Heading',()=>{
+        render(<BlogPage blog={{blog:blog}} comments={{comments:comments}}/>)
+        const comment=screen.getByTestId("add-comment")
+        expect(comment).toHaveTextContent("Add Comment")
+    })
+    it('Should render Title label in add comment section',()=>{
+        render(<BlogPage blog={{blog:blog}} comments={{comments:comments}}/>)
+        const comment=screen.getByTestId("comment-title")
+        expect(comment).toHaveTextContent("Title")
+    })
+    it('Should render Comment Title input in add comment section',()=>{
+        render(<BlogPage blog={{blog:blog}} comments={{comments:comments}}/>)
+        const comment=screen.getByTestId("comment-title-input")
+        expect(comment).toBeInTheDocument()
+    })
+    it('Should render the comment label in add comment section',()=>{
+        render(<BlogPage blog={{blog:blog}} comments={{comments:comments}}/>)
+        const comment=screen.getByTestId("comment-label")
+        expect(comment).toHaveTextContent("Comment")
+    })
+    it('Should render comment input in add comment section',()=>{
+        render(<BlogPage blog={{blog:blog}} comments={{comments:comments}}/>)
+        const comment=screen.getByTestId("comment-input")
+        expect(comment).toBeInTheDocument()
+    })
+    it('Should render the submit button in add comment section',()=>{
+        render(<BlogPage blog={{blog:blog}} comments={{comments:comments}}/>)
+        const comment=screen.getByTestId("submit")
         expect(comment).toHaveTextContent("Comment")
     })
     
